@@ -20,9 +20,30 @@ def generate_password(first_name, last_name, bcit_id):
 
 def change_password():
     password_meets_specifications = False
+    new_password = input("Enter new password: ")
     while password_meets_specifications == False:
-        new_password = input("Enter new password: ")
         password_length = len(new_password)
+
+        if password_length > 7:
+            password_length_complies = True
+        else:
+            password_length_complies = False
+
+        has_uppercase = any(char.isupper() for char in new_password)
+        has_lowercase = any(char.islower() for char in new_password)
+        has_digit = any(char.isdigit() for char in new_password)
+
+        if password_length_complies == True and has_uppercase == True and has_lowercase == True and has_digit == True:
+            password_meets_specifications = True
+
+        else:
+            print("New password does not meet specifications\n"
+                  "Password should be at least 7 characters long \n"
+                  "Password should contain at least one uppercase character \n"
+                  "Password should contain at least one lowercase character \n"
+                  "Password should contain at least one digit ")
+
+    return new_password
 
 
 
