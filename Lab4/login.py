@@ -20,8 +20,9 @@ def generate_password(first_name, last_name, bcit_id):
 
 def change_password():
     password_meets_specifications = False
-    new_password = input("Enter new password: ")
+
     while password_meets_specifications == False:
+        new_password = input("Enter new password: ")
         password_length = len(new_password)
 
         if password_length > 7:
