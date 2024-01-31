@@ -19,6 +19,10 @@ def generate_password(first_name, last_name, bcit_id):
 
 
 def change_password():
+    """
+
+    :return:
+    """
     password_meets_specifications = False
 
     while password_meets_specifications == False:
@@ -45,12 +49,6 @@ def change_password():
                   "Password should contain at least one digit ")
 
     return new_password
-
-
-
-
-
-
 
 
 def extract_first_three_characters_from_string(string):
