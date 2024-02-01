@@ -9,8 +9,8 @@ def main():
 
 def get_book_info():
     """
-
-    :return:
+    Recieves user input and formats it properly
+    :return:returns concatenated string joining with /
     """
     book_title = input("Enter book title: ").strip()
     book_isbn = input("Enter book ISBN: ").strip()
@@ -25,9 +25,9 @@ def get_book_info():
 
 def to_csv_format(string):
     """
-
+    Formats an input string in csv style
     :param string:
-    :return:
+    :return:formatted string in CSV style
     """
     csv_list = string.split("/")
     csv_string = ",".join(csv_list)
@@ -36,17 +36,17 @@ def to_csv_format(string):
 
 def to_JSON_format(csv_string):
     """
-
-    :param csv_string:
-    :return:
+    Converts a csv style string to a json format string
+    :param csv_string: csv formatted string
+    :return:JSON style formatted string
     """
-    csv_string_list = csv_string.split(",")
-    book_title = csv_string_list[0]
-    book_isbn = csv_string_list[1]
-    author_last_name = csv_string_list[2]
-    book_publisher = csv_string_list[3]
-    year_of_publication = csv_string_list[4]
-    book_price_in_usd = csv_string_list[5]
+    csv_comma_indexes = get_separator_indexes(csv_string,",")
+    book_title = csv_string[:csv_comma_indexes[0]]
+    book_isbn = csv_string[csv_comma_indexes[0]+1:csv_comma_indexes[1]]
+    author_last_name = csv_string[csv_comma_indexes[1]+1:csv_comma_indexes[2]]
+    book_publisher = csv_string[csv_comma_indexes[2]+1:csv_comma_indexes[3]]
+    year_of_publication = csv_string[csv_comma_indexes[3]+1:csv_comma_indexes[4]]
+    book_price_in_usd = csv_string[csv_comma_indexes[4]+1:csv_comma_indexes[5]]
     JSON_string = f'{{"Book Title":"{book_title}",'\
                   f'"Book ISBN":"{book_isbn}",'\
                   f'"Author Last Name":"{author_last_name}",'\
@@ -56,16 +56,23 @@ def to_JSON_format(csv_string):
     return JSON_string
 
 
-def get_separator_index(string):
+def get_separator_indexes(string,character):
     """
-
-    :param string:
-    :return:
+    Finds all the positions in which a specific character can be found in a specific string
+    :param string: input string
+    :param character: target character
+    :return:List of indexes in which the target character was found in the string
     """
-    pass
+    indexes = []
+    start_index = 0
+    comma_index = string.find(character)
+    indexes.append(comma_index)
+    while comma_index != -1:
+        start_index = comma_index+1
+        comma_index = string.find(character, start_index)
+        indexes.append(comma_index)
 
-
-
+    return indexes
 
 
 if __name__ == "__main__":
