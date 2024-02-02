@@ -9,7 +9,7 @@ def main():
 
 def get_book_info():
     """
-    Recieves user input and formats it properly
+    Receives user input and formats it properly
     :return:returns concatenated string joining with /
     """
     book_title = input("Enter book title: ").strip()
